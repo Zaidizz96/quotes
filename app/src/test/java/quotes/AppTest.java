@@ -3,12 +3,65 @@
  */
 package quotes;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.Test;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+
+    @Test
+    void parsingTest() {
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader("app/src/main/resources/recentquotes.json"));
+
+            Gson gson = new Gson();
+            Type qouteType = new TypeToken<ArrayList<Quote>>() {
+            }.getType();
+            ArrayList<Quote> quoteList = gson.fromJson(bufferedReader, qouteType);
+
+            assertNotNull(quoteList);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testDisplay_Random_Quotes_OnEachRun() {
+        String previousQuote = null;
+        String currentQuote="";
+
+        for (int i = 0; i < 10; i++) {
+            currentQuote = QuoteMapper.getDisplayedQuote();
+            if (previousQuote != null) {
+                assertEquals(previousQuote, currentQuote);
+            }
+            previousQuote = currentQuote;
+        }
+    }
+
+    @Test
+    public void testGetRandomNumber() {
+        int min = 1;
+        int max = 10;
+        int randomNum = QuoteMapper.getRandomNumber(min, max);
+        assertTrue(randomNum >= min && randomNum < max);
     }
 }
