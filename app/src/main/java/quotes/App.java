@@ -3,11 +3,13 @@
  */
 package quotes;
 
-import java.io.File;
-
 public class App {
     public static void main(String[] args) {
-        File file = new File("app/src/main/resources/recentquotes.json");
-        System.out.println(QuoteMapper.getDisplayedQuote(file));
+//        File file = new File("app/src/main/resources/recentquotes.json");
+//        System.out.println(QuoteMapper.getDisplayedQuote(file));
+        String apiUrl = "https://api.quotable.io/random";
+
+        System.out.println(QuoteMapper.addRandomQuote(apiUrl));
+
     }
 }
