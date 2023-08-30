@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -15,12 +16,12 @@ public class QuoteMapper {
         Random random = new Random();
         return random.ints(min, max).findFirst().getAsInt();
     }
-    public static String getDisplayedQuote(){
+    public static String getDisplayedQuote(File file){
         String resultQuote="";
         BufferedReader bufferedReader = null;
         try {
-            FileReader file = new FileReader("app/src/main/resources/recentquotes.json");
-            bufferedReader = new BufferedReader(file);
+
+            bufferedReader = new BufferedReader(new FileReader(file));
 
             Gson gson = new Gson();
             Type qouteType = new TypeToken<ArrayList<Quote>>() {}.getType();

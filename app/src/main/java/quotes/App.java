@@ -3,8 +3,11 @@
  */
 package quotes;
 
+import java.io.File;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println(QuoteMapper.getDisplayedQuote());
+        File file = new File("app/src/main/resources/recentquotes.json");
+        System.out.println(QuoteMapper.getDisplayedQuote(file));
     }
 }
