@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -21,7 +22,9 @@ class AppTest {
     void parsingTest() {
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader("app/src/main/resources/recentquotes.json"));
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("recentquotes.json").getFile());
+            bufferedReader = new BufferedReader(new FileReader(file));
 
             Gson gson = new Gson();
             Type qouteType = new TypeToken<ArrayList<Quote>>() {
@@ -47,9 +50,11 @@ class AppTest {
     public void testDisplay_Random_Quotes_OnEachRun() {
         String previousQuote = null;
         String currentQuote = "";
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("recentquotes.json").getFile());
 
         for (int i = 0; i < 10; i++) {
-            currentQuote = QuoteMapper.getDisplayedQuote();
+            currentQuote = QuoteMapper.getDisplayedQuote(file);
 
             // Add more information to the assertion message
             if (previousQuote != null) {
