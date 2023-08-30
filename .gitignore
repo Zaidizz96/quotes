@@ -1,21 +1,49 @@
-.gradle
-**/build/
-!src/**/build/
+# Gradle files
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
 
-# Ignore Gradle GUI config
-gradle-app.setting
+# IDE files (you can adjust this based on your IDE)
+.idea/
+*.iml
+*.ipr
+*.iws
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+# Compiled files
+*.class
+*.jar
+*.war
+*.ear
+*.jpi
 
-# Avoid ignore Gradle wrappper properties
-!gradle-wrapper.properties
+# Logs
+*.log
 
-# Cache of project
-.gradletasknamecache
+# Gradle cache
+gradle/
+gradlew
+gradlew.bat
+gradle-wrapper.properties
 
-# Eclipse Gradle plugin generated files
-# Eclipse Core
+# Dependency lock files
+**/*.lock
+
+# macOS specific
+.DS_Store
+
+# Windows thumbnail cache files
+Thumbs.db
+
+# Eclipse specific files
+.settings/
+
+# IntelliJ IDEA specific files
+*.idea/
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Eclipse project specific files
 .project
-# JDT-specific (Eclipse Java Development Tools)
 .classpath
