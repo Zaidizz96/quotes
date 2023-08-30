@@ -46,13 +46,20 @@ class AppTest {
     @Test
     public void testDisplay_Random_Quotes_OnEachRun() {
         String previousQuote = null;
-        String currentQuote="";
+        String currentQuote = "";
 
         for (int i = 0; i < 10; i++) {
             currentQuote = QuoteMapper.getDisplayedQuote();
+
+            // Add more information to the assertion message
             if (previousQuote != null) {
-                assertEquals(previousQuote, currentQuote);
+                assertNotEquals(
+                        "Quotes are not different (iteration " + i + " and " + (i + 1) + ")",
+                        previousQuote,
+                        currentQuote
+                );
             }
+
             previousQuote = currentQuote;
         }
     }
