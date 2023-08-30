@@ -36,6 +36,12 @@ This application uses the following methods:
 
 - `getRandomNumber(int min, int max)`: Generates a random number between the specified range.
 - `getDisplayedQuote()`: Retrieves a random quote from the JSON file and returns it as a formatted string.
+- `getQuotesJson(gson, apiQuote)`:
+ This private method reads the list of quotes from a local JSON file, adds the new API quote to the list, and writes the updated list back to the file.
+- `getQuote(url)`:
+  This method fetches a random quote from the provided URL using the QuotableClient class
+- `getDisplayedQuote(file)`:
+  This method reads a random quote from a local file to be displayed when there's an error connecting to the internet.
 
 ## Contributing
 
@@ -44,3 +50,16 @@ Contributions are welcome! If you have any suggestions or improvements, feel fre
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Testing 
+Testing
+The Quotable Client includes a suite of tests to verify its functionality:
+
+testGetRandomQuote()
+This test ensures that you can successfully fetch a random quote from the API. It checks whether the returned RandomQuoteAPI object is not null, indicating a successful API call.
+
+testGet_Quote_When_Api_Connection_Failed()
+This test simulates an API connection failure by providing an invalid URL. It then uses the addRandomQuote() method to attempt to fetch a quote. Since the connection is expected to fail, this test checks whether the returned quote string is not null, indicating that the local fallback mechanism is working.
+
+testApiQuoteSavedLocally()
+This test verifies that a quote fetched from the API using the addRandomQuote() method is saved locally and displayed correctly. It checks whether the API quote response and the local quote response are both not null, and whether the local quote response contains the API quote.

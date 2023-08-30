@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # Gradle files
 .gradle/
 build/
@@ -47,3 +48,23 @@ Thumbs.db
 # Eclipse project specific files
 .project
 .classpath
+=======
+.idea/*
+out/*
+.gitignore
+*.xml
+/.idea/gradle.xml
+/.idea/workspace.xml
+/.idea/gradle.xm
+/.gradle/
+/.idea/
+/build/
+app/build/
+.gitattributes
+app/build.gradle
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+settings.gradle
+>>>>>>> Stashed changes

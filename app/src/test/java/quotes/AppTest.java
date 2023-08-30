@@ -4,6 +4,7 @@
 package quotes;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.Test;
 
@@ -75,5 +76,34 @@ class AppTest {
         int max = 10;
         int randomNum = QuoteMapper.getRandomNumber(min, max);
         assertTrue(randomNum >= min && randomNum < max);
+    }
+
+    @Test
+    public void testGetRandomQuote() throws IOException {
+        String url = "https://api.quotable.io/random";
+        QuotableClient client = new QuotableClient();
+        RandomQuoteAPI randomQuoteAPI = client.getQuote(url);
+
+        assertNotNull(randomQuoteAPI);
+    }
+
+    @Test
+    public void testGet_Quote_When_Api_Connection_Failed(){
+        String testUrl = "httpsadasdasdsquotablasdsae.ioasdasdsasd/random"; // make url fail
+
+        // this method used to get random api quote based on valid url .
+        assertNotNull(QuoteMapper.addRandomQuote(testUrl));
+    }
+
+
+    @Test
+    public void testApiQuoteSavedLocally() throws IOException {
+        String apiQuote = QuoteMapper.addRandomQuote("https://api.quotable.io/random");
+        assertNotNull(apiQuote); // Verify that the API quote response is not null
+
+        String localQuote = QuoteMapper.getDisplayedQuote(new File("app/src/main/resources/recentquotes.json"));
+        assertNotNull(localQuote); // Verify that the local quote response is not null
+
+        assertTrue(localQuote.contains(apiQuote)); // Verify that API quote is in local quotes
     }
 }
